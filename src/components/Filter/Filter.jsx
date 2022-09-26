@@ -3,7 +3,6 @@ import s from '../Filter/Filter.module.css';
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-// import { filterContacts } from '../../redux/actions/filterAction';
 import { filterContacts } from '../../redux/Slice/filterSlice/filterSlice';
 
 export const Filter = () => {

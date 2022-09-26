@@ -1,15 +1,23 @@
 import s from '../ContactList/ContactList.module.css';
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { deleteContact } from '../../redux/actions/contactsAction';
-import { deleteContact } from '../../redux/Slice/contactsSlice/contactsSlice';
+import {
+  getContactsThunk,
+  deleteContactsThunk,
+} from '../../redux/operationsContacts/operationsContacts';
+import { Loader } from 'components/Loader';
 import React from 'react';
 
 export const ContactList = () => {
-  const contacts = useSelector(state => state.contacts);
-  const filter = useSelector(state => state.filter);
+  const { contacts } = useSelector(state => state.contacts);
+  const { filter } = useSelector(state => state);
+  const isLoading = useSelector(state => state.contacts.isLoading);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getContactsThunk());
+  }, [dispatch]);
 
   const filterContacts = useMemo(() => {
     const normalizedFilter = filter.toLowerCase();
@@ -18,23 +26,35 @@ export const ContactList = () => {
     );
   }, [contacts, filter]);
 
-  return (
-    <ul className={s.list}>
-      {filterContacts.map(({ id, name, number }) => {
-        return (
-          <li key={id} className={s.item}>
-            <span className={s.name}>{name}: </span>
-            <span className={s.tel}>{number} </span>
-            <button
-              className={s.btn}
-              type="button"
-              onClick={() => dispatch(deleteContact(id))}
-            >
-              Delete
-            </button>
-          </li>
-        );
-      })}
-    </ul>
-  );
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (!contacts.length) {
+    return <p>Сontact list is empty</p>;
+  }
+
+  if (!filterContacts.length) {
+    return <p>Сontact not found</p>;
+  } else {
+    return (
+      <ul className={s.list}>
+        {filterContacts.map(({ id, name, number }) => {
+          return (
+            <li key={id} className={s.item}>
+              <span className={s.name}>{name}: </span>
+              <span className={s.tel}>{number} </span>
+              <button
+                className={s.btn}
+                type="button"
+                onClick={() => dispatch(deleteContactsThunk(id))}
+              >
+                Delete
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
 };
