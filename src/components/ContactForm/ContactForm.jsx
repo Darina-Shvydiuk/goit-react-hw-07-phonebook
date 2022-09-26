@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { createContact } from '../../redux/actions/contactsAction';
+// import { createContact } from '../../redux/actions/contactsAction';
+import { createContact } from '../../redux/Slice/contactsSlice/contactsSlice';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();

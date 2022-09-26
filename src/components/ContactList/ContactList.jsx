@@ -1,7 +1,8 @@
 import s from '../ContactList/ContactList.module.css';
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from '../../redux/actions/contactsAction';
+// import { deleteContact } from '../../redux/actions/contactsAction';
+import { deleteContact } from '../../redux/Slice/contactsSlice/contactsSlice';
 import React from 'react';
 
 export const ContactList = () => {
