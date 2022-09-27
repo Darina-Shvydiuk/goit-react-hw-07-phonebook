@@ -39,11 +39,11 @@ export const ContactList = () => {
   } else {
     return (
       <ul className={s.list}>
-        {filterContacts.map(({ id, name, number }) => {
+        {filterContacts.map(({ id, name, phone }) => {
           return (
             <li key={id} className={s.item}>
               <span className={s.name}>{name}: </span>
-              <span className={s.tel}>{number} </span>
+              <span className={s.tel}>{phone} </span>
               <button
                 className={s.btn}
                 type="button"

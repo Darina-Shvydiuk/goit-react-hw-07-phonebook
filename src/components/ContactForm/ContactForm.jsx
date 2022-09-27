@@ -1,7 +1,7 @@
 import s from '../ContactForm/ContactForm.module.css';
 
 import React, { useState } from 'react';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { postContactsThunk } from '../../redux/operationsContacts/operationsContacts';
@@ -10,7 +10,7 @@ export const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(state => state.contacts.contacts);
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
 
   const handleChange = event => {
     const { name, value } = event.currentTarget;
@@ -19,8 +19,8 @@ export const ContactForm = () => {
         setName(value);
         break;
 
-      case 'number':
-        setNumber(value);
+      case 'phone':
+        setPhone(value);
         break;
 
       default:
@@ -31,7 +31,7 @@ export const ContactForm = () => {
   const handleSubmit = event => {
     event.preventDefault();
 
-    const newContact = { id: nanoid(), name, number };
+    const newContact = { phone, name };
     const contactName = newContact.name.toLowerCase();
     if (
       contacts.find(recordName => recordName.name.toLowerCase() === contactName)
@@ -45,7 +45,7 @@ export const ContactForm = () => {
 
   const resetForm = () => {
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   return (
@@ -67,10 +67,10 @@ export const ContactForm = () => {
         Tel:
         <input
           className={s.input}
-          value={number}
+          value={phone}
           onChange={handleChange}
           type="tel"
-          name="number"
+          name="phone"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required

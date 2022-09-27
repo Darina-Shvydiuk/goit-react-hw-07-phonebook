@@ -12,6 +12,7 @@ const initialContacts = {
   isLoading: false,
   error: '',
 };
+
 export const contactsSlice = createSlice({
   name: 'contacts',
   initialState: initialContacts,
@@ -35,7 +36,8 @@ export const contactsSlice = createSlice({
     },
     [postContactsThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.contacts.unshift(action.payload);
+      console.log(action.payload);
+      state.contacts.push(action.payload);
       state.error = '';
     },
     [postContactsThunk.rejected]: (state, action) => {
@@ -48,7 +50,10 @@ export const contactsSlice = createSlice({
     },
     [deleteContactsThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.contacts.filter(contact => contact.id !== action.payload);
+
+      state.contacts = state.contacts.filter(
+        contact => contact.id !== action.payload.id
+      );
       state.error = '';
     },
     [deleteContactsThunk.rejected]: (state, action) => {
@@ -59,4 +64,4 @@ export const contactsSlice = createSlice({
 });
 
 // export const contactsReducer = contactsSlice.reducer;
-export const { createContact, deleteContact } = contactsSlice.actions;
+// export const { createContact, deleteContact } = contactsSlice.actions;
