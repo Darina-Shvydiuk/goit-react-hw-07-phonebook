@@ -1,4 +1,4 @@
-// import { initialContacts } from './initialStateContacts';
+import { initialContacts } from './initialStateContacts';
 
 import { createSlice } from '@reduxjs/toolkit';
 import {
@@ -6,12 +6,6 @@ import {
   postContactsThunk,
   deleteContactsThunk,
 } from '../../../redux/operationsContacts/operationsContacts';
-
-const initialContacts = {
-  contacts: [],
-  isLoading: false,
-  error: '',
-};
 
 export const contactsSlice = createSlice({
   name: 'contacts',
@@ -36,7 +30,6 @@ export const contactsSlice = createSlice({
     },
     [postContactsThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log(action.payload);
       state.contacts.push(action.payload);
       state.error = '';
     },
@@ -62,6 +55,3 @@ export const contactsSlice = createSlice({
     },
   },
 });
-
-// export const contactsReducer = contactsSlice.reducer;
-// export const { createContact, deleteContact } = contactsSlice.actions;

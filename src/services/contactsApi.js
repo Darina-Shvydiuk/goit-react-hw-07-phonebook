@@ -12,7 +12,6 @@ export const getContacts = async () => {
 
 export const postContacts = async newContact => {
   try {
-    console.log(newContact);
     const { data } = await axios.post(BASE_URL, newContact);
     return data;
   } catch (error) {
@@ -21,7 +20,6 @@ export const postContacts = async newContact => {
 };
 
 export const deleteContacts = async id => {
-  console.log(id);
   try {
     const { data } = await axios.delete(`${BASE_URL}/${id}`);
     return data;

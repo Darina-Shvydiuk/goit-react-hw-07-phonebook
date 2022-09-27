@@ -1,7 +1,6 @@
 import s from '../ContactForm/ContactForm.module.css';
 
 import React, { useState } from 'react';
-// import { nanoid } from 'nanoid';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { postContactsThunk } from '../../redux/operationsContacts/operationsContacts';

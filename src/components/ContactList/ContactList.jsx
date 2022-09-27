@@ -12,7 +12,6 @@ export const ContactList = () => {
   const { contacts } = useSelector(state => state.contacts);
   const { filter } = useSelector(state => state);
   const isLoading = useSelector(state => state.contacts.isLoading);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
