@@ -5,7 +5,7 @@ import {
   getContactsThunk,
   deleteContactsThunk,
 } from '../../redux/operationsContacts/operationsContacts';
-import { Loader } from 'components/Loader';
+import { Loader } from '../Loader';
 import React from 'react';
 
 export const ContactList = () => {
